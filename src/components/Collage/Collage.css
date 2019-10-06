@@ -1,0 +1,31 @@
+.collage--Container{
+    display: grid;
+    justify-items: center;
+    width: 100%;
+}
+
+.images--Container{
+    display: grid;
+    grid-gap: 3px;  
+    grid-template-columns: repeat(auto-fit, 100px);
+    justify-items: center;
+    padding: 10px;
+    width: 550px;
+}
+
+img {
+    display: grid;
+    justify-self: center;
+    object-fit: cover;
+    max-width:230px;
+    max-height:95px;
+    width: auto;
+    height: auto;
+    -webkit-transition: all 2s ease-out;
+    transition: all 2s ease-out
+}
+
+img:hover{
+  -webkit-transform: translateX(50px);
+  transform: translateX(50px);
+}
