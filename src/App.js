@@ -14,37 +14,38 @@ const Gallery = lazy(() => import('./routes/Gallery'))
 const RandomCollage = lazy(() => import('./routes/RandomCollage'))
 
 const App = () => {
-  return <div className="App">
-    <Router>
-      <nav className="App-nav">
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/collage">Collage</Link>
-          </li>
-          <li>
-            <Link to="/gallery">Gallery</Link>
-          </li>
-        </ul>
-      </nav>
+  return (
+    <div className="App">
+      <Router>
+        <nav className="App-nav">
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/collage">Collage</Link>
+            </li>
+            <li>
+              <Link to="/gallery">Gallery</Link>
+            </li>
+          </ul>
+        </nav>
 
-      <Suspense fallback={<div>Loading...</div>}>
-        <Switch>
-          <Route path="/collage">
-            <RandomCollage />
-          </Route>
-          <Route path="/gallery">
-            <Gallery />
-          </Route>
-          <Route path="/">
-            <Home />
-          </Route>
-        </Switch>
-      </Suspense>
-    </Router>
-  </div>
+        <Suspense fallback={<div>Loading...</div>}>
+          <Switch>
+            <Route path="/collage">
+              <RandomCollage />
+            </Route>
+            <Route path="/gallery">
+              <Gallery />
+            </Route>
+            <Route path="/">
+              <Home />
+            </Route>
+          </Switch>
+        </Suspense>
+      </Router>
+    </div>)
 }
 
 export default App

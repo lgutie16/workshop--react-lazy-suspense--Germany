@@ -14,9 +14,9 @@ const LoadImage = createResource((src) => new Promise((resolve, reject) => {
 
 const RenderImage = ({ src }) => {
     LoadImage.read(src)
-    return <img src={src} alt="" className="Gallery-image" />
+    return (
+        <img src={src} alt="" className="Gallery-image" />)
 }
-
 
 const FetchImage = ({ id }) => {
     const image = cache[id]
@@ -27,23 +27,25 @@ const FetchImage = ({ id }) => {
         throw promise
     }
 
-    return <div>
-        <pre className="Gallery-json"> {JSON.stringify(image || 'Unknown', null, 2)}</pre>
+    return (
+        <div>
+            <pre className="Gallery-json"> {JSON.stringify(image || 'Unknown', null, 2)}</pre>
 
-        <ErrorBoundary FallbackComponent={() => 'There was an error...'}>
-            <Suspense fallback="loading...">
-                <RenderImage src={image.download_url} />
-            </Suspense>
-        </ErrorBoundary>
-    </div>
+            <ErrorBoundary FallbackComponent={() => 'There was an error...'}>
+                <Suspense fallback="loading...">
+                    <RenderImage src={image.download_url} />
+                </Suspense>
+            </ErrorBoundary>
+        </div>)
 }
 
 const ImageInfo = ({ id }) => {
-    return <ErrorBoundary FallbackComponent={() => 'There was an error...'}>
-        <Suspense fallback="loading...">
-            <FetchImage id={id} />
-        </Suspense>
-    </ErrorBoundary>
+    return (
+        <ErrorBoundary FallbackComponent={() => 'There was an error...'}>
+            <Suspense fallback="loading...">
+                <FetchImage id={id} />
+            </Suspense>
+        </ErrorBoundary>)
 }
 
 const Gallery = () => {
