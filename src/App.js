@@ -9,7 +9,7 @@ import './App.css';
 // Show a list of post (from api call) by demand
 // Show how to test a component with lazy loading
 
-
+const Home = lazy(() => import('./routes/Home'))
 const Gallery = lazy(() => import('./routes/Gallery'))
 const RandomCollage = lazy(() => import('./routes/RandomCollage'))
 
@@ -39,7 +39,7 @@ const App = () => {
             <Gallery />
           </Route>
           <Route path="/">
-            <div>We have three examples</div>
+            <Home />
           </Route>
         </Switch>
       </Suspense>
