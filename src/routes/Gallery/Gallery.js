@@ -1,11 +1,9 @@
-import React, { useState, useEffect, Suspense } from 'react'
+import React, { useState, Suspense } from 'react'
 import ErrorBoundary from 'react-error-boundary'
 import { unstable_createResource as createResource } from 'react-cache'
 import fetchImages from '../../fechImages'
 
-
 const cache = {}
-
 
 const LoadImage = createResource((src) => new Promise((resolve, reject) => {
     const img = new Image();
@@ -16,7 +14,7 @@ const LoadImage = createResource((src) => new Promise((resolve, reject) => {
 
 const RenderImage = ({ src }) => {
     LoadImage.read(src)
-    return <img src={src} />
+    return <img src={src} alt="" className="Gallery-image" />
 }
 
 
@@ -30,7 +28,7 @@ const FetchImage = ({ id }) => {
     }
 
     return <div>
-        {JSON.stringify(image || 'Unknown', null, 2)}
+        <pre className="Gallery-json"> {JSON.stringify(image || 'Unknown', null, 2)}</pre>
 
         <ErrorBoundary FallbackComponent={() => 'There was an error...'}>
             <Suspense fallback="loading...">
@@ -58,15 +56,18 @@ const Gallery = () => {
 
     return (
         <div>
+            <h1> Gallery </h1>
+            <legend />
             <form onSubmit={handleSubmit}>
-                <label htmlFor="id-input">Id</label>
-                <input id="id-input" name="id" />
-                <button type="submit">Submit</button>
+                <fieldset>
+                    <label htmlFor="id-input">Image Id: </label>
+                    <input id="id-input" name="id" />
+                    <button type="submit">Submit</button>
+                </fieldset>
             </form>
             <div>
                 {id && <ImageInfo id={id} />}
             </div>
-
         </div>
     )
 
