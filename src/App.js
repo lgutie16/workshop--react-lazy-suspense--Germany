@@ -1,17 +1,12 @@
-import React, { lazy, Suspense } from 'react'
+import React from 'react' // Import Lazy and Suspense import React, {lazy, Suspense} from 'react'
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
-//import { Home, About, Members } from './routes'
+
+//Change this to dynamic imports using lazy const Name = lazy(()=> import(''))
+import Home from './routes/Home'
+import Gallery from './routes/Gallery'
+import RandomCollage from './routes/RandomCollage'
+
 import './App.css';
-
-// https://web.dev/code-splitting-suspense
-// Show Basic Component lazy loading (done)
-// Show route lazy loading
-// Show a list of post (from api call) by demand
-// Show how to test a component with lazy loading
-
-const Home = lazy(() => import('./routes/Home'))
-const Gallery = lazy(() => import('./routes/Gallery'))
-const RandomCollage = lazy(() => import('./routes/RandomCollage'))
 
 const App = () => {
   return (
@@ -30,20 +25,18 @@ const App = () => {
             </li>
           </ul>
         </nav>
-
-        <Suspense fallback={<div>Loading...</div>}>
-          <Switch>
-            <Route path="/collage">
-              <RandomCollage />
-            </Route>
-            <Route path="/gallery">
-              <Gallery />
-            </Route>
-            <Route path="/">
-              <Home />
-            </Route>
-          </Switch>
-        </Suspense>
+        {/* Suspense routes */}
+        <Switch>
+          <Route path="/collage">
+            <RandomCollage />
+          </Route>
+          <Route path="/gallery">
+            <Gallery />
+          </Route>
+          <Route path="/">
+            <Home />
+          </Route>
+        </Switch>
       </Router>
     </div>)
 }

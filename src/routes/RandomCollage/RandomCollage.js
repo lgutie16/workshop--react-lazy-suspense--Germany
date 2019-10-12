@@ -1,6 +1,8 @@
-import React, { useState, lazy, Suspense } from 'react'
+import React, { useState } from 'react' // Import Lazy and Suspense import React, {lazy, Suspense} from 'react'
 
-const Collage = lazy(() => import('../../components/Collage'))
+//Change this to dynamic imports using lazy const Name = lazy(()=> import(''))
+import Collage from '../../components/Collage'
+
 
 const RandomCollage = () => {
     const [showHeavyComponent, setShowHeavyComponent] = useState(false)
@@ -18,10 +20,10 @@ const RandomCollage = () => {
                 />
                 Check to Show Collage
             </label>
-            <Suspense fallback="loading" >
-                {showHeavyComponent && <Collage />}
-            </Suspense>
-        </div>)
+            {/* Suspense Collage component*/}
+            {showHeavyComponent && <Collage />}
+        </div>
+    )
 }
 
 export default RandomCollage

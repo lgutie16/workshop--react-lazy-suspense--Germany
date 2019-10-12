@@ -1,9 +1,14 @@
 import React, { useState, Suspense } from 'react'
 import ErrorBoundary from 'react-error-boundary'
-import { unstable_createResource as createResource } from 'react-cache'
+import { unstable_createResource as createResource } from 'react-cache'  //Cache 
 import fetchImages from '../../fechImages'
 
-const cache = {}
+
+// What should be wrapped with suspense?
+// Which blocks in this file are returning promises?
+// Suspense blocks of code you think you should suspense
+
+const cache = {} //Cache
 
 const LoadImage = createResource((src) => new Promise((resolve, reject) => {
     const img = new Image();
@@ -30,22 +35,19 @@ const FetchImage = ({ id }) => {
     return (
         <div>
             <pre className="Gallery-json"> {JSON.stringify(image || 'Unknown', null, 2)}</pre>
-
             <ErrorBoundary FallbackComponent={() => 'There was an error...'}>
-                <Suspense fallback="loading...">
-                    <RenderImage src={image.download_url} />
-                </Suspense>
+                <RenderImage src={image.download_url} />
             </ErrorBoundary>
-        </div>)
+        </div>
+    )
 }
 
 const ImageInfo = ({ id }) => {
     return (
         <ErrorBoundary FallbackComponent={() => 'There was an error...'}>
-            <Suspense fallback="loading...">
-                <FetchImage id={id} />
-            </Suspense>
-        </ErrorBoundary>)
+            <FetchImage id={id} />
+        </ErrorBoundary>
+    )
 }
 
 const Gallery = () => {
@@ -67,9 +69,9 @@ const Gallery = () => {
                     <button type="submit">Submit</button>
                 </fieldset>
             </form>
-            <div>
+            {/* <div>
                 {id && <ImageInfo id={id} />}
-            </div>
+            </div> */}
         </div>
     )
 
